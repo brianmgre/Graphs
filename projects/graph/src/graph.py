@@ -115,3 +115,26 @@ class Graph:
             for child in self.vertices[starting_vertex_id]:
                 if child not in visited:
                     self.dftr(child, visited)
+
+    def bfs(self, starting_vertex_id, search_id):
+        q = Queue()
+        visited = set()
+
+        if starting_vertex_id == search_id:
+            print(starting_vertex_id)
+
+        q.enqueue(starting_vertex_id)
+
+        while q.size() > 0:
+
+            v = q.dequeue()
+
+            if v == search_id:
+                return v
+            elif v not in visited:
+                print(v)
+                visited.add(v)
+
+                for neighbor in self.vertices[v]:
+                    q.enqueue(neighbor)
+        return ('Item is not found')
