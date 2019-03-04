@@ -131,10 +131,15 @@ class Graph:
 
             if v == search_id:
                 return v
-            elif v not in visited:
+
+            if v not in visited:
                 print(v)
                 visited.add(v)
 
                 for neighbor in self.vertices[v]:
                     q.enqueue(neighbor)
+
         return ('Item is not found')
+
+    def bfst(self, starting_vertex_id, search_id):
+        pass
