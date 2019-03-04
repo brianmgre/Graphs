@@ -102,3 +102,16 @@ class Graph:
                 # Then, put all of it's children into the stack
                 for neighbor in self.vertices[v]:
                     s.push(neighbor)
+
+    def dftr(self, starting_vertex_id, visited=None):
+
+        if visited == None:
+            visited = set()
+
+        if starting_vertex_id not in visited:
+            print(starting_vertex_id)
+            visited.add(starting_vertex_id)
+
+            for child in self.vertices[starting_vertex_id]:
+                if child not in visited:
+                    self.dftr(child, visited)
