@@ -121,7 +121,7 @@ class Graph:
         visited = set()
 
         if starting_vertex_id == search_id:
-            print(starting_vertex_id)
+            return(starting_vertex_id)
 
         q.enqueue(starting_vertex_id)
 
@@ -141,5 +141,27 @@ class Graph:
 
         return ('Item is not found')
 
-    def bfst(self, starting_vertex_id, search_id):
-        pass
+    def dfs(self, starting_vertex_id, search_id):
+
+        s = Stack()
+        visited = set()
+
+        if starting_vertex_id == search_id:
+            return(starting_vertex_id)
+
+        s.push(starting_vertex_id)
+
+        while s.size() > 0:
+
+            v = s.pop()
+
+            if search_id == v:
+                return v
+
+            if v not in visited:
+                print(v)
+                visited.add(v)
+                for neighbor in self.vertices[v]:
+                    s.push(neighbor)
+
+        return ('Item is not found')
