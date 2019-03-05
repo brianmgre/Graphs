@@ -123,21 +123,24 @@ class Graph:
         if starting_vertex_id == search_id:
             return(starting_vertex_id)
 
-        q.enqueue(starting_vertex_id)
+        q.enqueue([starting_vertex_id])
 
         while q.size() > 0:
 
-            v = q.dequeue()
-
-            if v == search_id:
-                return v
+            path = q.dequeue()
+            v = path[-1]
 
             if v not in visited:
-                print(v)
                 visited.add(v)
+                if v == search_id:
+                    return path
+
+                print(f'plus one {self.vertices[v]}')
 
                 for neighbor in self.vertices[v]:
-                    q.enqueue(neighbor)
+                    new_path = list(path)
+                    new_path.append(neighbor)
+                    q.enqueue(new_path)
 
         return ('Item is not found')
 
@@ -146,22 +149,22 @@ class Graph:
         s = Stack()
         visited = set()
 
-        if starting_vertex_id == search_id:
-            return(starting_vertex_id)
-
-        s.push(starting_vertex_id)
+        s.push([starting_vertex_id])
 
         while s.size() > 0:
 
-            v = s.pop()
-
-            if search_id == v:
-                return v
+            path = s.pop()
+            v = path[-1]
 
             if v not in visited:
-                print(v)
                 visited.add(v)
+
+                if v == search_id:
+                    return path
+
                 for neighbor in self.vertices[v]:
-                    s.push(neighbor)
+                    new_path = list(path)
+                    new_path.append(neighbor)
+                    s.push(new_path)
 
         return ('Item is not found')
