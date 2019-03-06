@@ -10,7 +10,7 @@ from graph import Graph
 
 
 def main():
-    graph = Graph()  # Instantiate your graph
+    graph = Graph()  # Instantiate your graph 
     graph.add_vertex('1')
     graph.add_vertex('2')
     graph.add_vertex('3')
