@@ -34,6 +34,7 @@ def main():
     print(graph.dfs('1', '6'))
 
 
+
 if __name__ == '__main__':
     # TODO - parse argv
     main()
