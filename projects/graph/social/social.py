@@ -63,7 +63,7 @@ class SocialGraph:
 
         # populating friendship dict
 
-        for friends in possible_friendships[:(avgFriendships * numUsers)]:
+        for friends in possible_friendships[:(avgFriendships * numUsers) //2]:
             self.addFriendship(friends[0], friends[1])
 
     def getAllSocialPaths(self, userID):
