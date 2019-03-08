@@ -91,11 +91,8 @@ def new_room():
     graph[player.currentRoom.id] = {}
 
     for exit in player.currentRoom.getExits():
-
         graph[player.currentRoom.id][exit] = '?'
-        print(f'graph {graph}')
-
-
+        
 
 
 
