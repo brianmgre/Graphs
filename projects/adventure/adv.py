@@ -46,7 +46,7 @@ class Queue:
         else:
             return None
 
-
+#bfs looking for next unsearched room
 def bfs(start_room_id):
 
     q = Queue()
@@ -72,7 +72,7 @@ def bfs(start_room_id):
                     q.enqueue(new_path)
     return []
 
-
+#uses the path return from bfs to create directions
 def stuck(path):
 
     directions = []
@@ -86,7 +86,7 @@ def stuck(path):
     return directions
 
 
-
+#adds a new entry into graphs for new room and shows exits
 def new_room():
     graph[player.currentRoom.id] = {}
 
@@ -101,41 +101,55 @@ def new_room():
 
 while len(graph) < 500:
 
+    #creates graph
     if len(graph) == 0:
         new_room()
     
     possible_exits = []
 
-
+    #possible directions 
     for exit in graph[player.currentRoom.id]:
         if graph[player.currentRoom.id][exit] == "?":
             possible_exits.append(exit)
             random.shuffle(possible_exits)
 
-
+    # checks length of exits
     if len(possible_exits) > 0:
 
+        #picks the first direction in array
         previous_direction = possible_exits[0]
 
+        #added to the path traveled
         traversalPath.append(previous_direction)
 
+        #store of current room before player moved
         previous_room = player.currentRoom.id
 
+        #move 
         player.travel(previous_direction)
 
+
+        #checks to see if room is in graph
         if player.currentRoom.id not in graph:
             new_room()
 
+        #sets previous room's fields to current room with correct direction
         graph[previous_room][previous_direction] = player.currentRoom.id
 
+
+        #sets current room's fields to previous room with correct direction
         graph[player.currentRoom.id][inverse_dir[previous_direction]] = previous_room
 
     else:
+        #player is at a deadend. bfs is called to find closest unsearched room
         deadend = bfs(player.currentRoom.id)
+        closest_room = stuck(deadend)
 
+        #verifies a path is returned
         if len(deadend) != 0 :
 
-            for exit in stuck(deadend):
+            #player is moved through the path
+            for exit in closest_room:
                 traversalPath.append(exit)
                 player.travel(exit)
               
